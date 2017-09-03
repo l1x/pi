@@ -1,0 +1,16 @@
+Name: Pi
+Version: 0.1
+Synopsis: Nope
+Authors:
+  Istvan Szukacs <istvan@streambrightdata.com>
+License: MIT
+Homepage: http://0.0.0.0
+OASISFormat: 0.4
+BuildTools: ocamlbuild
+Plugins: META (0.4), DevFiles (0.4)
+Executable "pi"
+  Path: src
+  MainIs: pi.ml
+  CompiledObject: best
+  BuildDepends:
+    str,unix
