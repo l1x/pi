@@ -19,3 +19,10 @@ _build/
 setup.data
 setup.log
 *.swp
+
+
+Makefile
+_tags
+configure
+myocamlbuild.ml
+setup.ml
