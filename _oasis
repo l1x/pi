@@ -10,7 +10,7 @@ BuildTools: ocamlbuild
 Plugins: META (0.4), DevFiles (0.4)
 Executable "pi"
   Path: src
-  MainIs: pi.ml
+  MainIs: main.ml
   CompiledObject: best
   BuildDepends:
     str,unix
