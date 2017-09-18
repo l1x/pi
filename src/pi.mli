@@ -1,7 +1,7 @@
 (*
  * Point in a two-dimensional Euclidean space
  *)
-type point = {x:float; y:float;}
+type point
 val pi_known : float
 val point_to_string : point -> string
 val gen_point : float -> float -> point
@@ -14,7 +14,7 @@ val gen_point : float -> float -> point
  *)
 val distance_between_points : point -> point -> float
 val distance_from_origin : point -> float
-val count_within : counter:int -> int
-val count_within_stepping : counter:int -> stepping:int -> int
-val percentage_error : float -> float
-val pi_and_error : float -> float -> float -> string
+val frnd : float -> float
+val gen_list : int -> int -> int list
+val count_within : counter:int -> int * int
+

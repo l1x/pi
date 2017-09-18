@@ -13,4 +13,3 @@ Executable "pi"
   MainIs: main.ml
   CompiledObject: best
   BuildDepends:
-    str,unix
