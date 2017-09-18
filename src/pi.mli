@@ -3,8 +3,8 @@
  *)
 type point
 val pi_known : float
-val point_to_string : point -> string
 val gen_point : float -> float -> point
+val origin : point
 (*
  * 'Euclidean distance or Euclidean metric is the "ordinary" straight-line distance between
  * two points in Euclidean space. With this distance, Euclidean space becomes a metric space.
@@ -14,7 +14,7 @@ val gen_point : float -> float -> point
  *)
 val distance_between_points : point -> point -> float
 val distance_from_origin : point -> float
-val frnd : float -> float
-val gen_list : int -> int -> int list
-val count_within : counter:int -> int * int
-
+val points : point Streamz.stream
+val within : point -> bool
+val count_within : point list -> int
+val find_points_within_radius : number_of_samples:int -> int

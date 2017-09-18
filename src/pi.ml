@@ -1,43 +1,37 @@
+module S = Streamz
+
 type point = {x:float; y:float;}
 
 let pi_known = 3.141592653589793238462643383279502884197169399375105820974944592307816406286
 
-let percentage_error pi_estimated =
-  ((pi_known -. pi_estimated) /. pi_known) *. 100.0
-
-let point_to_string p =
-  Printf.sprintf "%.2f %.2f" p.x p.y
-
 let gen_point xr yr =
   {x=xr; y=yr}
+
+let origin =  (gen_point 0.0 0.0)
 
 let distance_between_points p q =
   (p.x -. q.x) *. (p.x -. q.x) +. (p.y -. q.y) *. (p.y -. q.y)
 
 let distance_from_origin p =
-  distance_between_points p (gen_point 0.0 0.0)
+  distance_between_points p origin
 
-let frnd f = floor (f +. 0.5)
+let points =
+  let rec fibgen point =
+    S.Cons(point, fun () -> fibgen (gen_point (Random.float 1.0) (Random.float 1.0))) in
+  fibgen (gen_point (Random.float 1.0) (Random.float 1.0))
 
-(*Split n into roughly m pieces*)
-let gen_list n m =
- let f = int_of_float (frnd ((float_of_int n) /. (float_of_int m))) in
- let rec aux n f acc =
-   if n > f then
-     aux (n - f) f (f::acc)
-   else (List.rev (n::acc))
- in
- aux n f []
+let within point =
+  let d = distance_from_origin point in
+  match d with
+    | d when d < 1.0 -> true
+    | _ -> false
 
-let count_within ~counter:n =
-  let rec count_within_aux ~counter:n ~within:m =
-    match n, m with
-      | 0, m -> m
-      | n, m ->
-        let cc = gen_point (Random.float 1.0) (Random.float 1.0) in
-        let dist = distance_from_origin cc in
-          match dist with
-            | dist when dist < 1.0 -> count_within_aux ~counter:(n - 1) ~within:(m + 1)
-            | dist when dist >= 1.0 -> count_within_aux ~counter:(n - 1) ~within:m
-            | _ -> 0 in
-  (n, count_within_aux ~counter:n ~within:0)
+let count_within l =
+  List.length (List.filter (fun point -> within point) (List.tl l))
+
+let find_points_within_radius ~number_of_samples:s =
+  let rec aux s acc =
+    match s, acc with
+      | 0, acc -> acc
+      | s, acc -> aux (s-1000) (acc + count_within (S.take points 1001)) in
+  aux s 0
