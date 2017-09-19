@@ -3,7 +3,6 @@
  *)
 type point
 val pi_known : float
-val gen_point : float -> float -> point
 val origin : point
 (*
  * 'Euclidean distance or Euclidean metric is the "ordinary" straight-line distance between
@@ -14,7 +13,4 @@ val origin : point
  *)
 val distance_between_points : point -> point -> float
 val distance_from_origin : point -> float
-val points : point Streamz.stream
-val within : point -> bool
-val count_within : point list -> int
-val find_points_within_radius : number_of_samples:int -> int
+val find_pi : number_of_samples:int -> float
