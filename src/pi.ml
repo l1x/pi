@@ -6,7 +6,9 @@ type point = {x:float; y:float;}
 
 let origin =  {x=0.0; y=0.0}
 
-let distance_between_points p q =  (p.x -. q.x) *. (p.x -. q.x) +. (p.y -. q.y) *. (p.y -. q.y)
+let distance_between_points p q =
+  (q.x -. p.x) *. (q.x -. p.x) +. (q.y -. p.y) *. (q.y -. p.y)
+  |> sqrt
 
 let distance_from_origin p = distance_between_points p origin
 
